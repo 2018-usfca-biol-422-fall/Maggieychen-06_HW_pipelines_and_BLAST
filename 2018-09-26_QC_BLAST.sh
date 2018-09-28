@@ -19,4 +19,14 @@ do
 	fastq-dump -v $SRA_number -O data/raw_data
 done
 
+# Create QC report for each of the  runs using FastQC program 
+# Can use 'cyberduck' to  tranfer reports to personal laptop
+# and view files in .html formate 
+echo "Generating QC report to output/fastqc directory"
+
+
+# Trim the sequence base on their quality score
+# this will discard sequence under 150 base pairs
+# and cut off reads when he base score is lower than 25
+echo"Trimming the sequences based on quality score"
 
