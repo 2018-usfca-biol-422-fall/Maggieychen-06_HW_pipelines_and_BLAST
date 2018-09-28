@@ -23,10 +23,29 @@ done
 # Can use 'cyberduck' to  tranfer reports to personal laptop
 # and view files in .html formate 
 echo "Generating QC report to output/fastqc directory"
-
+fastqc data/raw_data/*.fastq --outdir=output/fastqc
 
 # Trim the sequence base on their quality score
 # this will discard sequence under 150 base pairs
 # and cut off reads when he base score is lower than 25
-echo"Trimming the sequences based on quality score"
+# create a new output directoryÃas data/trimmed
+echo "Trimming the sequences based on quality score"
+mkdir data/trimmed
+for filename "@$" 
+do 
+	TrimmomaticSE -threads 2 -phred33 data/raw_data/"$filename" data/trimmed/$(basename -s .fastq "$filename").trim.fastq LEADING:5 TRAILING:5 SLIDINGWINDOW:8:25 MINLEN:150
+done
+
+# Convert fastq files into fasta files
+# So files can be used as BLASR queries
+echo "Converting fastq to fasta files....."
+for filename "$@"
+do 
+	bioawk -c fastx '{print ">"$name"\n"$seq}' data/trimmed/"$filename"
+done
+
+
+# In the nt database, use blastn to search for the top matches of sequences
+# This will create a  blast_results.csv file as output in the output directory
+# and a query_seqs.fasta file, with one row for each uery sequence
 
