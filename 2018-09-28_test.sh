@@ -6,17 +6,18 @@
 # create a new output directory as data/trimmed
 # identify the location as data/raw_data/ when running the script
 echo "Trimming the sequences based on quality score"
-for filename in "$@"
+for filename in data/raw_data/*.fastq
 do
 	TrimmomaticSE -threads 2 -phred33 "$filename" data/trimmed/$(basename -s .fastq "$filename").trim.fastq LEADING:5 TRAILING:5 SLIDINGWINDOW:8:25 MINLEN:150
 done
 
-# Convert fastq files into fasta files
+
+# Convert fastq files into fasta files, save in data/trimmed directory
 # So files can be used as BLASR queries
-echo "Converting fastq to fasta files....."
-for filename in "$@"
+echo "Converting fastq to fasta files into data/trimmed directory....."
+for filename in data/trimmed/*.fastq
 do
-        bioawk -c fastx '{print ">"$name"\n"$seq}' "$filename"
+        bioawk -c fastx '{print ">"$name"\n"$seq}' "$filename" > data/trimmed/$(basename -s .fastq "$filename").fasta
 done
 
 
