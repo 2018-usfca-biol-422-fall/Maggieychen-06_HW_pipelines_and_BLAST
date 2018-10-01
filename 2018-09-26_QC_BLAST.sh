@@ -4,12 +4,13 @@
 # 2018 September 26
 # ychen254@dons.usfca.edu
 
-# This is a script for download fastq file, run QC check, trimming and BLAST them
-# againist local copy of GenBank
+# This is a script for download fastq file, run QC and generate QC report for each individual sample sequence, 
+# trimming and BLAST them againist local copy of GenBank
 # The data being used is from the NCBI  sequence  Read Archive study number ERP022657
 # The data is from the research to demostrate whether the skin-associated bacteria community composition will match 
-# the bacteria community on the keyboard and mice used by students. 
+# the bacteria community on the keyboard and mouse used by students. 
 
+# Before run the script please create all the driecotries needed, data, data/raw_data output output/fastqc
 
 # Download the files in run table to the raw data directory
 # the pipe and tail -n +2 is a handy way to exclude the first line
@@ -30,6 +31,7 @@ fastqc data/raw_data/*.fastq --outdir=output/fastqc
 # and cut off reads when he base score is lower than 25
 # create a new output directory as data/trimmed
 # identify the location as data/raw_data/ when running the script
+mkdir data/trimmed
 echo "Trimming the sequences based on quality score into data/trimmed directory....."
 for filename in data/raw_data/*.fastq
 do
@@ -48,6 +50,7 @@ done
 # In the nt database, use blastn to search for the top matches of sequences
 # This will create a  blast_results.csv file as output in the output directory
 # and a query_seqs.fasta file, with one row for each query sequence
+mkdir output/blast
 echo "BLASTING fasta files, save results into output/blast directory....."
 for filename in data/trimmed/*.fasta
 do
