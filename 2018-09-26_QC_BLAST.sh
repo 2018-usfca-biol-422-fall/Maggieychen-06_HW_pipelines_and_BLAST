@@ -50,6 +50,16 @@ done
 # In the nt database, use blastn to search for the top matches of sequences
 # This will create a  blast_results.csv file as output in the output directory
 # and a query_seqs.fasta file, with one row for each query sequence
+# options and what they're for:
+# -db sets which database to use, in this case the nucleotide database
+# -num_threads is how many different processor threads to use
+# -outfrmt is the output format, further info available here:
+# https://www.ncbi.nlm.nih.gov/books/NBK279675/
+# -o is the filename to save the results in
+# -max_target_seqs is the number of matches ot return for each query
+# -negative_gilist tells BLAST which sequences to exclude from matches
+# This cuts down on the number of uncultured or environmental matches
+# -query is the fasta file of sequences we want to search for matches to
 mkdir output/blast
 echo "BLASTING fasta files, save results into output/blast directory....."
 for filename in data/trimmed/*.fasta
