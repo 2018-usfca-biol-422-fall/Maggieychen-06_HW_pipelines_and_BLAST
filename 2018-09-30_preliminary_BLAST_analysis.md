@@ -15,7 +15,7 @@ break the GC bonding.
 
 Almost all samples passed the per-base quality check but there are a few sets 
 of data that has worse quality than others, the running numbers are 
-ERR1942293(Male palm) and ERR1942299(Male palm), which has a significantly low score. For run number 
+ERR1942293 (Male palm) and ERR1942299 (Male palm), which has a significantly low score. For run number 
 ERR1942282 (Female Mouse) and ERR1942284 (Female Mouse), the quality was acceptable but lower than
 most of other sets of data. This issue with low per base quality will directly
 influence the survival rate of sequences during the trim step in the script. 
@@ -55,7 +55,7 @@ can be one of the major sources of passing on diseases.
 
 Another commonly found match in BLAST is *Bartonella washoeensis*. This belongs 
 to the genus of Bartonella, which is first isolate from dog with mitral valve endocarditis, 
-then it was also found on human with cardiac disease (bruno,etc, 2018). This can also cause human disease. 
+then it was also found on human with cardiac disease (bruno,et al, 2018). This can also cause human disease. 
 This bacteria was found on two different females mouse sample and two different male palm sample,
 again, there is no match on same individual's mouse and palm samples. However, this can still be an indication of 
 pets' disease or bacteria that is related to human disease can be passed on from daily lifes. Petting a sick dog or touch 
